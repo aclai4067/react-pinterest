@@ -34,16 +34,24 @@ class App extends React.Component {
     this.setState({ selectedBoardId: boardId });
   };
 
-  render() {
+  renderView = () => {
     const { authed, selectedBoardId } = this.state;
+    if (!authed) {
+      return (<Auth />);
+    }
+    if (!selectedBoardId) {
+      return (<BoardsContainer setSingleBoard={this.setSingleBoard} />);
+    }
+    return (<SingleBoard selectedBoardId={selectedBoardId} setSingleBoard={this.setSingleBoard} />);
+  }
+
+  render() {
+    const { authed } = this.state;
     return (
       <div className="App">
         <MyNav authed={authed} />
-          {
-            (authed) ? (<BoardsContainer setSingleBoard={this.setSingleBoard} />) : (<Auth />)
-          }
         {
-          (selectedBoardId) && (<SingleBoard selectedBoardId={selectedBoardId} setSingleBoard={this.setSingleBoard} />)
+          this.renderView()
         }
       </div>
     );
