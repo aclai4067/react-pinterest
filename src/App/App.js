@@ -5,6 +5,7 @@ import './App.scss';
 import firebaseConnection from '../helpers/data/connection';
 import Auth from '../components/Auth/Auth';
 import MyNav from '../components/MyNav/MyNav';
+import BoardsContainer from '../components/BoardsContainer/BoardsContainer';
 
 firebaseConnection();
 
@@ -33,7 +34,7 @@ class App extends React.Component {
       <div className="App">
         <MyNav authed={authed} />
           {
-            (authed) ? (<div>You Logged In </div>) : (<Auth />)
+            (authed) ? (<BoardsContainer />) : (<Auth />)
           }
       </div>
     );
