@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import './App.scss';
 import firebaseConnection from '../helpers/data/connection';
 import Auth from '../components/Auth/Auth';
+import MyNav from '../components/MyNav/MyNav';
 
 firebaseConnection();
 
@@ -30,7 +31,7 @@ class App extends React.Component {
     const { authed } = this.state;
     return (
       <div className="App">
-          <button className="btn btn-secondary">Bootstrap Button</button>
+        <MyNav authed={authed} />
           {
             (authed) ? (<div>You Logged In </div>) : (<Auth />)
           }
