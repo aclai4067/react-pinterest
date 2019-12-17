@@ -61,10 +61,10 @@ class SingleBoard extends React.Component {
     return (
       <div>
         <button className="btn btn-info" onClick={this.removeSelectedBoardId}>x Close Board View</button>
-        <PinForm addNewPin={this.addPin} selectedBoardId={this.props.selectedBoardId} />
         <div className="SingleBoard col-8 offset-2">
           <h2>{board.name}</h2>
           <p>{board.description}</p>
+          <PinForm addNewPin={this.addPin} selectedBoardId={this.props.selectedBoardId} />
           <div className="d-flex flex-wrap">
             {pins.map((pin) => <Pins key={pin.id} pin={pin} trash={this.removePin} />)}
           </div>

@@ -6,6 +6,7 @@ import authData from '../../helpers/data/authData';
 class PinForm extends React.Component {
   static propTypes = {
     addNewPin: PropTypes.func,
+    selectedBoardId: PropTypes.string,
   }
 
   state = {
