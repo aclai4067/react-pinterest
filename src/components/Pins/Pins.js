@@ -1,10 +1,18 @@
 import './Pins.scss';
 import React from 'react';
+import PropTypes from 'prop-types';
 import pinShape from '../../helpers/propz/pinShape';
 
 class Pins extends React.Component {
   static propTypes = {
     pin: pinShape.pinShape,
+    trash: PropTypes.func,
+  }
+
+  deletePinEvent = (e) => {
+    e.preventDefault();
+    const { trash, pin } = this.props;
+    trash(pin.id);
   }
 
   render() {
@@ -15,7 +23,7 @@ class Pins extends React.Component {
           <img src={pin.imageUrl} className="card-img-top" alt="" />
           <div className="card-body">
             <h5 className="card-title">{pin.title}</h5>
-            <button className="btn btn-danger" onClick={() => {}}>X</button>
+            <button className="btn btn-danger" onClick={this.deletePinEvent}>X</button>
           </div>
         </div>
       </div>
