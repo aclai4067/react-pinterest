@@ -7,6 +7,8 @@ class Board extends React.Component {
   static propTypes = {
     board: boardShape.boardShape,
     setSingleBoard: PropTypes.func,
+    changeEditMode: PropTypes.func,
+    setBoardToEdit: PropTypes.func,
   }
 
   //  event to view single board
@@ -16,6 +18,12 @@ class Board extends React.Component {
     setSingleBoard(board.id);
   };
 
+  setEditMode = (e) => {
+    const { changeEditMode, setBoardToEdit, board } = this.props;
+    e.preventDefault();
+    changeEditMode(true);
+    setBoardToEdit(board);
+  }
 
   render() {
     const myBoard = this.props.board;
@@ -26,7 +34,8 @@ class Board extends React.Component {
           <div className="card-body">
             <h5 className="card-title">{myBoard.name}</h5>
             <p className="card-text">{myBoard.description}</p>
-            <button onClick={this.setSelectedBoardId} className="btn btn-primary">View Pins</button>
+            <button onClick={this.setSelectedBoardId} className="btn btn-info">View Pins</button>
+            <button onClick={this.setEditMode} className="btn btn-secondary">Edit Board</button>
           </div>
         </div>
       </div>

@@ -13,6 +13,9 @@ class BoardsContainer extends React.Component {
 
   state = {
     boards: [],
+    editMode: false,
+    boardToEdit: {},
+    displayBoardForm: false,
   }
 
   getBoards = () => {
@@ -30,7 +33,20 @@ class BoardsContainer extends React.Component {
     boardData.newBoard(boardObj)
       .then(() => {
         this.getBoards();
+        this.setState({ displayBoardForm: false });
       }).catch((err) => console.error(err));
+  }
+
+  changeEditMode = (editMode) => {
+    this.setState({ editMode, displayBoardForm: true });
+  }
+
+  setBoardToEdit = (board) => {
+    this.setState({ boardToEdit: board });
+  }
+
+  showBoardForm = () => {
+    this.setState({ displayBoardForm: true });
   }
 
   render() {
@@ -38,9 +54,12 @@ class BoardsContainer extends React.Component {
 
     return (
       <div>
-        <BoardForm addNewBoard={this.addBoard} />
+        {
+          (this.state.displayBoardForm) ? (<BoardForm addNewBoard={this.addBoard} boardToEdit={this.state.boardToEdit} editMode={this.state.editMode} />)
+            : (<button onClick={this.showBoardForm} className="btn btn-warning mt-2">Show Board Form</button>)
+        }
         <div className="row d-flex flex-wrap justify-content-around">
-          {this.state.boards.map((board) => <Board key={board.id} board={board} setSingleBoard={setSingleBoard} />)}
+          {this.state.boards.map((board) => <Board key={board.id} board={board} setSingleBoard={setSingleBoard} changeEditMode={this.changeEditMode} setBoardToEdit={this.setBoardToEdit} />)}
         </div>
       </div>
     );
