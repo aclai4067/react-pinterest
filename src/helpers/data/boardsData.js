@@ -22,4 +22,11 @@ const getSingleBoard = (boardId) => axios.get(`${baseUrl}/boards/${boardId}.json
 
 const newBoard = (boardObj) => axios.post(`${baseUrl}/boards.json`, boardObj);
 
-export default { getBoardsByUid, getSingleBoard, newBoard };
+const updateBoard = (boardId, newBoardObj) => axios.put(`${baseUrl}/boards/${boardId}.json`, newBoardObj);
+
+export default {
+  getBoardsByUid,
+  getSingleBoard,
+  newBoard,
+  updateBoard,
+};
